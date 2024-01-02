@@ -10,15 +10,32 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: black;
+            background-image: url(amo.jpg);
+            background-repeat: no-repeat;
+            background-position: center;
+            position: relative;
             margin: 0;
+        }
+        @media only screen and (max-width: 600px) {
+  body {
+    font-size: 16px; 
+    background-image: url(amo.jpg);
+    width: 100%;
+    height: 500px;
+    
+  }
+            
         }
 
         #countdown {
             text-align: center;
             font-size: 2em;
-            color: #333;
+            color:red;
+            font: bolder;
+            
         }
+
+
 
         #message {
             font-size: 1.5em;
@@ -28,10 +45,11 @@
     <title>Happy New Year Countdown</title>
 </head>
 <body>
-    <h1>imposter</h1>
+    
     <div id="countdown"></div>
-    <div id="message"></div>
-
+    <div id="message"></div></main>
+   
+     
     <script>
         // Set the date we're counting down to (January 1, 2025 00:00:00)
         const countDownDate = new Date("Jan 1, 2025 00:00:00").getTime();
