@@ -3,81 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock with Glass Effect</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-image: url(amo.jpg);
-            background-repeat: no-repeat;
-            background-position: center;
-            position: relative;
             margin: 0;
-        }
-        @media only screen and (max-width: 600px) {
-  body {
-    font-size: 16px; 
-    background-image: url(amo.jpg);
-    width: 100%;
-    height: 500px;
-    
-  }
-            
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom right,blue, lime);
+            font-family: 'Arial', sans-serif;
         }
 
-        #countdown {
+        .glass-container {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px 40px;
             text-align: center;
-            font-size: 2em;
-            color:red;
-            font: bolder;
-            
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
+        .time {
+            color: white;
+            font-size: 2rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            opacity: 0.9; /* Adjusts the opacity of text */
+        }
 
+        #clock {
+            font-size: 3rem;
+            margin: 10px 0;
+        }
 
-        #message {
-            font-size: 1.5em;
-            color: #666;
+        #date {
+            font-size: 1.5rem;
         }
     </style>
-    <title>for 2025 Countdown</title>
 </head>
 <body>
-    
-    <div id="countdown"></div>
-    <div id="message"></div></main>
-   
-     
+    <div class="glass-container">
+      <h1 style="color: #0055;">KRSNA™</h1>
+        <div class="time">
+            <p id="clock"></p>
+            <p id="date"></p>
+        </div>
+    </div>
+
     <script>
-        // Set the date we're counting down to (January 1, 2025 00:00:00)
-        const countDownDate = new Date("Jan 1, 2025 00:00:00").getTime();
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const months = String(now.getMonth() + 1).padStart(2, '0');
+            const year = now.getFullYear();
 
-        // Update the countdown every 1 second
-        const x = setInterval(function() {
-            // Get the current date and time
-            const now = new Date().getTime();
+            document.getElementById('clock').innerText = `${hours}:${minutes}:${seconds}`;
+            document.getElementById('date').innerText = `Month: ${months}, Year: ${year}`;
+        }
 
-            // Calculate the time remaining
-            const distance = countDownDate - now;
-
-            // Calculate days, hours, minutes, and seconds
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // Display the countdown
-            document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-
-            // Display a message when the countdown is over
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("countdown").innerHTML = "Happy New Year!";
-                document.getElementById("message").innerHTML = "Wishing you a year filled with joy and success!";
-            }
-        }, 1000);
+        setInterval(updateClock, 1000);
+        updateClock(); // Initial call to display time immediately
     </script>
 </body>
 </html>
